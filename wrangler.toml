@@ -1,0 +1,11 @@
+name = "blog-reverse-proxy"
+main = "index.js"
+compatibility_date = "2024-04-14"
+
+route = "mayous.org/blog/*"
+
+
+account_id = "d6a1f43dd0b2d4efd5e301baa532fe30"  # Replace with your account ID
+zone_id= "e08ad294b9b7b4afdde5a0bf16a0e862"
+
+workers_dev = false
