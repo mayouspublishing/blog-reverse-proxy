@@ -2,7 +2,7 @@ name = "blog-reverse-proxy"
 main = "index.js"
 compatibility_date = "2024-04-14"
 
-route = "mayous.org/blog/*"
+route = "www.mayous.org/blog/*"
 
 
 account_id = "d6a1f43dd0b2d4efd5e301baa532fe30"  # Replace with your account ID
