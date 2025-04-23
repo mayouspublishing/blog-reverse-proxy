@@ -7,7 +7,8 @@ async function handleRequest(request) {
 
   // Extract path after /blog
  // const proxyPath = url.pathname.replace(/^\/blog/, '')
-  const proxyPath = url.pathname.replace(/^\/blog\/?/, '/')
+let proxyPath = url.pathname.replace(/^\/blog\/?/, '/')
+if (proxyPath === '') proxyPath = '/';
 
 
   // Construct target Blogger URL (updated to default blogspot domain)
