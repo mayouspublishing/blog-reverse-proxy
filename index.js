@@ -6,7 +6,9 @@ async function handleRequest(request) {
   const url = new URL(request.url)
 
   // Extract path after /blog
-  const proxyPath = url.pathname.replace(/^\/blog/, '')
+ // const proxyPath = url.pathname.replace(/^\/blog/, '')
+  const proxyPath = url.pathname.replace(/^\/blog\/?/, '/')
+
 
   // Construct target Blogger URL (updated to default blogspot domain)
   const targetUrl = `https://mayouspublishing.blogspot.com${proxyPath}`
