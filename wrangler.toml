@@ -4,7 +4,12 @@ compatibility_date = "2024-04-14"
 
 # Handle both www and root domain
 routes = [
+  # For www with and without trailing slash
+  { pattern = "www.mayous.org/blog", zone_id = "e08ad294b9b7b4afdde5a0bf16a0e862" },
   { pattern = "www.mayous.org/blog/*", zone_id = "e08ad294b9b7b4afdde5a0bf16a0e862" },
+
+  # For root domain with and without trailing slash
+  { pattern = "mayous.org/blog", zone_id = "e08ad294b9b7b4afdde5a0bf16a0e862" },
   { pattern = "mayous.org/blog/*", zone_id = "e08ad294b9b7b4afdde5a0bf16a0e862" }
 ]
 
