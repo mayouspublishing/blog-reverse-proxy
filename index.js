@@ -4,12 +4,9 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
   const url = new URL(request.url)
-
-  // Extract path after /blog
   let proxyPath = url.pathname.replace(/^\/blog\/?/, '/')
   if (proxyPath === '') proxyPath = '/'
 
-  // Rebuild target URL to blog.mayous.org
   const targetUrl = `https://blog.mayous.org${proxyPath}`
 
   const modifiedHeaders = new Headers()
@@ -18,8 +15,6 @@ async function handleRequest(request) {
       modifiedHeaders.set(key, value)
     }
   })
-
-  // Use desktop UA to avoid ?m=1 redirect
   modifiedHeaders.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133 Safari/537.36')
 
   const response = await fetch(targetUrl, {
@@ -33,10 +28,13 @@ async function handleRequest(request) {
   if (contentType.includes("text/html")) {
     let html = await response.text()
 
-    // Remove ?m=1 from internal Blogger links
+    // 1. Remove "?m=1" from URLs
     html = html.replace(/\?m=1/g, '')
 
-    // Fix canonical tag to use your proxied URL
+    // 2. Rewrite internal links to use mayous.org/blog
+    html = html.replace(/https:\/\/blog\.mayous\.org(\/[^\s"'<>]*)/g, 'https://www.mayous.org/blog$1')
+
+    // 3. Rewrite canonical tag to proxied domain
     html = html.replace(
       /<link rel="canonical".*?>/,
       `<link rel="canonical" href="${url.origin + url.pathname}"/>`
